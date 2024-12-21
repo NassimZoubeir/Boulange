@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"  >
+<div  th:fragment="barre-navigation">
+	<ul>
+		<li>
+			<a  href="/accueil">Accueil</a>
+		</li>
+		<li>
+			<a  href="/afficher-ordinateurs">Catalogue</a>
+		</li>
+		<li>
+			<a  href="/creer-compte">Créer un compte</a>
+		</li>
+
+		<li th:if="${session.utilisateur != null and session.utilisateur.role == 'administrateur'}">
+		<a href="/creer-ordinateur">Créer ordinateur </a>
+		</li>
+		
+		<li th:if="${session.utilisateur == null}">
+			<a href="/login">Se connecter</a>
+		</li>
+		<li th:if="${session.utilisateur != null}">
+			<a href="logout">Se déconnecter</a>
+		</li>
+	</ul>
+</div>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Liste des Ordinateurs</title>
+</head>
+    <h1>Liste des Ordinateurs</h1>
+    <ul>
+        <th:block th:each="ordinateur : ${ordinateurList}">
+            <li>
+                <h2 th:text="${ordinateur.denomination}"></h2>
+                <p>Prix : <span th:text="${ordinateur.prix}"></span> €</p>
+                <p>Processeur : <span th:text="${ordinateur.processeur}"></span></p>
+                <p>Écran : <span th:text="${ordinateur.ecran}"></span></p>
+                <p>RAM : <span th:text="${ordinateur.vive}"></span></p>
+                <img th:src="@{'/images/' + ${ordinateur.image}}" alt="Image de l'ordinateur">
+                <p><a th:href="${ordinateur.lien}" target="_blank">Lien vers le site</a></p>
+            </li>
+        </th:block>
+    </ul>
+</body>
+</html>
