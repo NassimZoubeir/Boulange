@@ -15,6 +15,7 @@
                   <th>Écran</th>
                   <th>RAM</th>
                   <th>Lien</th>
+				  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,6 +28,10 @@
                     <td th:text="${ordinateur.ecran}"></td>
                     <td th:text="${ordinateur.vive}"></td>
                     <td><a th:href="${ordinateur.lien}" target="_blank">Lien vers le site</a></td>
+					<td>
+					    <a th:href="'/afficher-ordinateur/' + ${ordinateur.id}" class="btn btn-info">Détail</a>
+					    <a th:if="${session.role != null}" th:href="'/acheter/' + ${ordinateur.id}" class="btn btn-danger">Acheter</a>
+					</td>
                   </tr>
               </tbody>
             </table> 
