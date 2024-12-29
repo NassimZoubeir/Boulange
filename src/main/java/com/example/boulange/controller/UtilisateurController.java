@@ -57,14 +57,17 @@ public  class  UtilisateurController  {
     	System.out.println("utilisateur:" + utilisateur);
     	if(utilisateur.getPasswdHash().equals(hashPassword)) {
     		System.out.println("Vous êtes connecté");
-    		request.getSession().setAttribute("utilisateur", utilisateur);
+    		request.getSession().setAttribute("id",  utilisateur.getId());
+			request.getSession().setAttribute("login",  utilisateur.getLogin());
+			request.getSession().setAttribute("role",  utilisateur.getRole());
     	}
     	else System.out.println("Vous n'êtes pas connecté");
     	return "accueil";
     }
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
-		request.getSession().removeAttribute("utilisateur");
+		System.out.println("====  /logout  ====");
+		request.getSession().invalidate();
 		return "accueil";
 	 }
 }
