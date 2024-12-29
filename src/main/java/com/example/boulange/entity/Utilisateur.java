@@ -1,8 +1,13 @@
 package com.example.boulange.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Utilisateur {
@@ -13,12 +18,16 @@ public class Utilisateur {
 	private String passwdHash;
 	private String email;
 	private String role;
+	@ManyToMany
+	private  List<Ordinateur>  acheterOrdinateurList;
+	
 	public Utilisateur() {}
 	public Utilisateur(String login, String passwdHash, String email, String role) {
 		this.login = login;
 		this.passwdHash = passwdHash;
 		this.email = email;
 		this.role = role;
+		acheterOrdinateurList = new ArrayList<Ordinateur>();
 	}
 	@Override
 	public String toString() {
@@ -51,5 +60,18 @@ public class Utilisateur {
 	public String getRole() {
 		return role;
 	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public List<Ordinateur> getAcheterOrdinateurList() {
+		return acheterOrdinateurList;
+	}
+	public void setAcheterOrdinateurList(List<Ordinateur> acheterOrdinateurList) {
+		this.acheterOrdinateurList = acheterOrdinateurList;
+	}
+	 public void acheterOrdinateur(Ordinateur ordinateur) {
+		 acheterOrdinateurList.add(ordinateur);
+	}
+	
 	
 }

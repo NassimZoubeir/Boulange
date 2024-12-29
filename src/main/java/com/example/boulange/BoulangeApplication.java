@@ -148,6 +148,9 @@ public class BoulangeApplication {
 		} catch (NoSuchAlgorithmException e) {
 			 System.out.println("Impossible de créer l'utilisateur admin");
 		}
+		 utilisateur.acheterOrdinateur(ordinateur1);
+			utilisateur.acheterOrdinateur(ordinateur2);
+			utilisateurRepository.save(utilisateur);
 
 	}	
 
