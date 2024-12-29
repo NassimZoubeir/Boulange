@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.repository.OrdinateurRepository;
 
@@ -20,5 +21,10 @@ public class OrdinateurService implements OrdinateurServiceItf {
 	@Override
 	 public void creerOrdinateur(Ordinateur ordinateur) {
 		ordinateurRepository.save(ordinateur);
+	 }
+	@Override
+	 public Ordinateur getOrdinateurById(Long id) {
+		Ordinateur ordinateur = ordinateurRepository.findById(id).get();
+		return ordinateur;
 	 }
 }

@@ -7,6 +7,6 @@ import com.example.boulange.entity.Ordinateur;
 
 public interface OrdinateurServiceItf {
 	List<Ordinateur> getAllOrdinateur();
-
 	void creerOrdinateur(Ordinateur ordinateur);
+	Ordinateur getOrdinateurById(Long id);
 }

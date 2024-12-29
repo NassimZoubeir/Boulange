@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.service.OrdinateurServiceItf;
@@ -66,19 +68,15 @@ public class OrdinateurController {
 
 	    	if (image != null && !image.isEmpty()) {
 	    	    try {
-	    	        
 	    	        imageName = image.getOriginalFilename();
 	    	        Path pathFile = Paths.get(imageDir, imageName);
 
-	    	        System.out.println("Chemin de l'image : " + pathFile.toString()); // Log pour vérifier le chemin final
+	    	        System.out.println("Chemin de l'image : " + pathFile.toString());
 
-	    	        
 	    	        File directory = new File(imageDir);
 	    	        if (!directory.exists()) {
 	    	            directory.mkdirs();
 	    	        }
-
-	    	        
 	    	        image.transferTo(pathFile.toFile());
 	    	    } catch (IllegalStateException | IOException e) {
 	    	        e.printStackTrace();
@@ -86,11 +84,19 @@ public class OrdinateurController {
 	    	        return "error"; 
 	    	    }
 	    	}
-
-	    	
 	    	Ordinateur ordinateur = new Ordinateur(denomination, prix, processeur, ecran, vive, imageName, lien);
 	    	ordinateurService.creerOrdinateur(ordinateur);
 
 	    	return "redirect:/afficher-ordinateurs";
 	    }
+	    @RequestMapping("/afficher-ordinateur/{id}")
+		 public String afficherOrdinateur(@PathVariable Long id, Model model) {
+			 System.out.println("==== /afficher-ordinateur ====");
+			 System.out.println("id=" + id);
+			 Ordinateur ordinateur = ordinateurService.getOrdinateurById(id);
+			 System.out.println("Ordinateur=" + ordinateur);
+			 model.addAttribute("ordinateur", ordinateur);
+			 model.addAttribute("titre", ordinateur.getDenomination());
+			 return "detail";
+		 }
 }

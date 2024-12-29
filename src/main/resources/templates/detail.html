@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+    <body>
+        <div layout:fragment="content">
+            
+            <img style="width:40%; height:auto" th:src="'/images/' + ${ordinateur.image}" alt="Image de l'ordinateur">
+            <br>
+
+            <h3 th:text="'Dénomination : ' + ${ordinateur.denomination}"></h3>
+            <br>
+
+            <h3 th:text="'Prix : ' + ${ordinateur.prix} + ' €'"></h3>
+            <br>
+            
+            <h3 th:text="'Processeur : ' + ${ordinateur.processeur}"></h3>
+            <br>
+
+            <h3 th:text="'Écran : ' + ${ordinateur.ecran} + ' pouces'"></h3>
+            <br>
+
+            <h3 th:text="'Mémoire vive : ' + ${ordinateur.vive} + ' Go'"></h3>
+            <br>
+            
+            <h3><a th:href="${ordinateur.lien}" class="btn btn-primary" target="_blank">Voir plus de détails</a></h3>
+        </div>
+    </body>
+</html>
