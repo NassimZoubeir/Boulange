@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+    <body>
+        <div layout:fragment="content">
+            <h1>Résumé de votre commande</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Image</th>
+                            <th>Dénomination</th>
+                            <th>Prix (€)</th>
+                            <th>Processeur</th>
+                            <th>Écran (pouces)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="ordinateur : ${ordinateurList}">
+                            <td th:text="${ordinateur.id}"></td>
+                            <td><img width="80" th:src="'/images/' + ${ordinateur.image}" alt="Image ordinateur"></td>
+                            <td th:text="${ordinateur.denomination}"></td>
+                            <td th:text="${ordinateur.prix}"></td>
+                            <td th:text="${ordinateur.processeur}"></td>
+                            <td th:text="${ordinateur.ecran}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            
+            <a href="/afficher-ordinateurs" class="btn btn-secondary">Retour au catalogue</a>
+        </div>
+    </body>
+</html>

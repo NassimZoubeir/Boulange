@@ -29,7 +29,7 @@
                     <td th:text="${ordinateur.vive}"></td>
                     <td><a th:href="${ordinateur.lien}" target="_blank">Lien vers le site</a></td>
 					<td><a th:href="'/afficher-ordinateur/' + ${ordinateur.id}" class="btn btn-info">Détail</a></td>
-					<td th:if="${session.role != null}"><a th:href="'/acheter/'+ ${ordinateur.id}" class="btn btn-danger">Acheter</a></td>
+					<td th:if="${session.role != null}"><a th:href="'/acheter/'+ ${ordinateur.id}" class="btn btn-danger">Ajouter au panier</a></td>
                   </tr>
               </tbody>
             </table> 

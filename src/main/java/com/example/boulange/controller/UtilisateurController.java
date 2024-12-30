@@ -1,12 +1,16 @@
 package com.example.boulange.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.entity.Utilisateur;
 import com.example.boulange.outil.Outil;
 import com.example.boulange.service.UtilisateurServiceItf;
@@ -70,4 +74,28 @@ public  class  UtilisateurController  {
 		request.getSession().invalidate();
 		return "accueil";
 	 }
+	@RequestMapping("/valider-panier")
+	public  String  validerPanier(Model  model,  HttpServletRequest  request)  {
+		System.out.println("====  /valider-panier  ====");
+		List<Long>  ordinateurAcheterListId  =  (List<Long>)  request.getSession().getAttribute("ordinateurAcheterListId");
+		System.out.println("ordinateurAcheterListId="  +  ordinateurAcheterListId);
+		if(ordinateurAcheterListId  !=  null)  {
+			Long  idUtilisateur  =  (Long)  request.getSession().getAttribute("id");
+			utilisateurService.acheterListOrdinateurUtilisateur(ordinateurAcheterListId,  idUtilisateur);
+			request.getSession().removeAttribute("ordinateurAcheterListId");
+		}
+		else  System.out.println("Pas d'ordinateur acheté");
+		return  "redirect:/afficher-achat";
+	}
+	@RequestMapping("/afficher-achat")
+	public  String  afficherAchat(Model  model,  HttpServletRequest  request)  {
+		System.out.println("====  /afficher-achat  ====");
+		Long  idUtilisateur  =  (Long)  request.getSession().getAttribute("id");
+		List<Ordinateur>  ordinateurList  =  utilisateurService.getAchatOrdinateurList(idUtilisateur);
+		System.out.println("ordinateurList="  +  ordinateurList);
+		model.addAttribute("denomination",  "Achat");
+		model.addAttribute("ordinateurList",  ordinateurList);
+		return  "achat";
+	}
+	
 }
