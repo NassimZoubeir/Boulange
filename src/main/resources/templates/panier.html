@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+    <body>
+        <div layout:fragment="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th>Dénomination</th>
+                        <th>Prix (€)</th>
+                        <th>Processeur</th>
+                        <th>Écran (pouces)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ordinateur : ${ordinateurAcheterList}">
+                        <td th:text="${ordinateur.id}"></td>
+                        <td><img width="80" th:src="'/images/' + ${ordinateur.image}" alt="Image ordinateur"></td>
+                        <td th:text="${ordinateur.denomination}"></td>
+                        <td th:text="${ordinateur.prix}"></td>
+                        <td th:text="${ordinateur.processeur}"></td>
+                        <td th:text="${ordinateur.ecran}"></td>
+                        <td>
+                            <a th:href="'/afficher-ordinateur/' + ${ordinateur.id}" class="btn btn-info">Détail</a>
+                            <a th:href="'/supprimer-panier/' + ${ordinateur.id}" class="btn btn-danger">Supprimer du panier</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="/valider-panier" class="btn btn-success">Valider le panier</a>
+        </div>
+    </body>
+</html>

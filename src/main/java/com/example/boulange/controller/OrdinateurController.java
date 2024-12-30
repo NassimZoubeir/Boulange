@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.service.OrdinateurServiceItf;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 
@@ -99,4 +101,32 @@ public class OrdinateurController {
 			 model.addAttribute("titre", ordinateur.getDenomination());
 			 return "detail";
 		 }
+		 @RequestMapping("/acheter/{id}")
+		    public String acheterOrdinateur(@PathVariable Long id, Model model, HttpServletRequest request) {
+		    	System.out.println("==== /acheter/" + id + " ====");
+		    	List<Long> ordinateurAcheterListId = (List<Long>) request.getSession().getAttribute("ordinateurAcheterListId");
+		    	if(ordinateurAcheterListId == null) {
+		    		ordinateurAcheterListId = new ArrayList<>();
+		    	}
+		    	
+		    	if(!ordinateurAcheterListId.contains(id)) {
+		    		ordinateurAcheterListId.add(id);
+		    	}
+		    	request.getSession().setAttribute("ordinateurAcheterListId", ordinateurAcheterListId);
+		    	System.out.println("ordinateurAcheterListId=" + ordinateurAcheterListId);
+		    	return "redirect:/afficher-panier";
+		    }
+		 @RequestMapping("/afficher-panier")
+			public String afficherPanier(Model model, HttpServletRequest request) {
+				System.out.println("==== /afficher-panier ====");
+				List<Long> ordinateurAcheterListId = (List<Long>) request.getSession().getAttribute("ordinateurAcheterListId");
+				System.out.println("ordinateurAcheterListId=" + ordinateurAcheterListId);
+				if(ordinateurAcheterListId != null) {
+					List<Ordinateur> ordinateurAcheterList = ordinateurService.getOrdinateurAcheterListParOrdinateurIdList(ordinateurAcheterListId);
+					model.addAttribute("ordinateurAcheterList", ordinateurAcheterList);
+				}
+				else System.out.println("Pas d'ordinateur acheté");
+				model.addAttribute("dénomination", "Achat d'ordinateur");
+				return "panier";
+			}
 }

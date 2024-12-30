@@ -1,5 +1,6 @@
 package com.example.boulange.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,13 @@ public class OrdinateurService implements OrdinateurServiceItf {
 		Ordinateur ordinateur = ordinateurRepository.findById(id).get();
 		return ordinateur;
 	 }
+	@Override
+	public List<Ordinateur> getOrdinateurAcheterListParOrdinateurIdList(List<Long> ordinateurAcheterListId) {
+		List<Ordinateur> ordinateurAcheterList = new ArrayList<>();
+		for(int i=0; i < ordinateurAcheterListId.size(); i++) {
+			ordinateurAcheterList.add(getOrdinateurById(ordinateurAcheterListId.get(i)));
+		}
+		return ordinateurAcheterList;
+	}
+	
 }
