@@ -1,5 +1,7 @@
 package com.example.boulange.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,8 +19,9 @@ public class Ordinateur {
     private int vive;
     private String image;
     private String lien;
+    private LocalDate dateAchat;
 
-    public Ordinateur() {}
+	public Ordinateur() {}
 
     public Ordinateur(String denomination, double prix, String processeur, double ecran, int vive, String image, String lien) {
         this.denomination = denomination;
@@ -93,4 +96,11 @@ public class Ordinateur {
     public void setLien(String lien) {
         this.lien = lien;
     }
+    public LocalDate getDateAchat() {
+		return dateAchat;
+	}
+
+	public void setDateAchat(LocalDate dateAchat) {
+		this.dateAchat = dateAchat;
+	}
 }

@@ -14,6 +14,7 @@
                             <th>Prix (€)</th>
                             <th>Processeur</th>
                             <th>Écran (pouces)</th>
+							<th>Date d'achat</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                             <td th:text="${ordinateur.prix}"></td>
                             <td th:text="${ordinateur.processeur}"></td>
                             <td th:text="${ordinateur.ecran}"></td>
+							<td th:text="${ordinateur.dateAchat != null ? ordinateur.dateAchat : 'Non défini'}"></td>
                         </tr>
                     </tbody>
                 </table>

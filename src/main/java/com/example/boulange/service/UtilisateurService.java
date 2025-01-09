@@ -1,5 +1,6 @@
 package com.example.boulange.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +37,20 @@ public  class UtilisateurService implements UtilisateurServiceItf {
 		return utilisateur;
 	}
 	@Override
-	public  void  acheterListOrdinateurUtilisateur(List<Long>  ordinateurIdList,  Long  idUtilisateur)  {
-		Utilisateur  utilisateur  =  lireUtilisateurParId(idUtilisateur);
-		List<Ordinateur>  ordinateurList  =  ordinateurService.getOrdinateurAcheterListParOrdinateurIdList(ordinateurIdList);
-		utilisateur.getAcheterOrdinateurList().addAll(ordinateurList);
-		System.out.println("majOrdinateurAcheterListUtilisateur  utilisateur="  +  utilisateur);
-		utilisateurRepository.save(utilisateur);
+	public void acheterListOrdinateurUtilisateur(List<Long> ordinateurIdList, Long idUtilisateur) {
+	    Utilisateur utilisateur = lireUtilisateurParId(idUtilisateur);
+	    List<Ordinateur> ordinateurList = ordinateurService.getOrdinateurAcheterListParOrdinateurIdList(ordinateurIdList);
 
+	    for (Ordinateur ordinateur : ordinateurList) {
+	        ordinateur.setDateAchat(LocalDate.now()); // Définir la date d'achat
+	        ordinateurRepository.save(ordinateur); // Sauvegarder les modifications
+	    }
+
+	    utilisateur.getAcheterOrdinateurList().addAll(ordinateurList);
+	    System.out.println("majOrdinateurAcheterListUtilisateur utilisateur=" + utilisateur);
+	    utilisateurRepository.save(utilisateur);
 	}
+
 	@Override
 	public List<Ordinateur> getAchatOrdinateurList(Long idUtilisateur) {
 		Utilisateur  utilisateur  =  lireUtilisateurParId(idUtilisateur);
