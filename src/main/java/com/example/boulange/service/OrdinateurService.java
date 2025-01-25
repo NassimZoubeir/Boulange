@@ -36,5 +36,13 @@ public class OrdinateurService implements OrdinateurServiceItf {
 		}
 		return ordinateurAcheterList;
 	}
+	@Override
+	public void decrementernombreOrdinateur(Long id) {
+		ordinateurRepository.decrementernombreOrdinateur(id);
+	}
+	@Override
+	public void incrementernombreOrdinateur(Long id) {
+		ordinateurRepository.incrementernombreOrdinateur(id);
+	}
 	
 }

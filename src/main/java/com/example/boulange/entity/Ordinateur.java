@@ -19,11 +19,11 @@ public class Ordinateur {
     private int vive;
     private String image;
     private String lien;
-    private LocalDate dateAchat;
+    private int nombreOrdinateur;
 
 	public Ordinateur() {}
 
-    public Ordinateur(String denomination, double prix, String processeur, double ecran, int vive, String image, String lien) {
+    public Ordinateur(String denomination, double prix, String processeur, double ecran, int vive, String image, String lien,int nombreOrdinateur) {
         this.denomination = denomination;
         this.prix = prix;
         this.processeur = processeur;
@@ -31,6 +31,7 @@ public class Ordinateur {
         this.vive = vive;
         this.image = image;
         this.lien = lien;
+        this.nombreOrdinateur = nombreOrdinateur;
     }
 
     public Long getId() {
@@ -96,11 +97,13 @@ public class Ordinateur {
     public void setLien(String lien) {
         this.lien = lien;
     }
-    public LocalDate getDateAchat() {
-		return dateAchat;
+
+	public int getNombreOrdinateur() {
+		return nombreOrdinateur;
 	}
 
-	public void setDateAchat(LocalDate dateAchat) {
-		this.dateAchat = dateAchat;
+	public void setNombreOrdinateur(int nombreOrdinateur) {
+		this.nombreOrdinateur = nombreOrdinateur;
 	}
+    
 }

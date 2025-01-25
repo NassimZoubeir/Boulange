@@ -30,7 +30,7 @@ public class BoulangeApplication {
 				13.3, 
 				16, 
 				"01.png",
-				"https://www.boulanger.com/ref/1156449");
+				"https://www.boulanger.com/ref/1156449",5);
 		
 		Ordinateur  ordinateur2  =  new  Ordinateur("PACKARD BELL PB314-35-P53X",
 				 449,
@@ -38,7 +38,7 @@ public class BoulangeApplication {
 				 14,
 				 8,
 				 "02.png",
-				 "https://www.boulanger.com/ref/1164052");
+				 "https://www.boulanger.com/ref/1164052",5);
 		
 		Ordinateur  ordinateur3  =  new  Ordinateur("Matebook 14s 2021 I7 16Go 512 Touch",
 				 1049,
@@ -46,7 +46,7 @@ public class BoulangeApplication {
 				 14.2,
 				 16,
 				 "03.png",
-				 "https://www.boulanger.com/ref/1171445");
+				 "https://www.boulanger.com/ref/1171445",4);
 		
 		Ordinateur  ordinateur4  =  new  Ordinateur("ACER Aspire A317-52-54QM Noir",
 				 699,
@@ -54,7 +54,7 @@ public class BoulangeApplication {
 				 17.3,
 				 8,
 				 "04.png",
-				 "https://www.boulanger.com/ref/1148125");
+				 "https://www.boulanger.com/ref/1148125",8);
 		
 		Ordinateur  ordinateur5  =  new  Ordinateur("ACER Aspire Vero AV15-51-78H5",
 				 899,
@@ -62,7 +62,7 @@ public class BoulangeApplication {
 				 15.6,
 				 16,
 				 "05.png",
-				 "https://www.boulanger.com/ref/1170405");
+				 "https://www.boulanger.com/ref/1170405",9);
 		
 		Ordinateur  ordinateur6  =  new  Ordinateur("PC Hybride HP ENVY x360 13-ay0034nf",
 				 799,
@@ -70,7 +70,7 @@ public class BoulangeApplication {
 				 13.3 ,
 				 8,
 				 "06.png",
-				 "https://www.boulanger.com/ref/1163913");
+				 "https://www.boulanger.com/ref/1163913",6);
 		
 		Ordinateur  ordinateur7  =  new  Ordinateur("PC Hybride LENOVO Flex 5 14ITL05-257",
 				 936.17,
@@ -78,7 +78,7 @@ public class BoulangeApplication {
 				 14,
 				 16,
 				 "07.png",
-				 "https://www.boulanger.com/ref/1164775");
+				 "https://www.boulanger.com/ref/1164775",2);
 		
 		Ordinateur  ordinateur8  =  new  Ordinateur("HP Envy 17-ch0039nf",
 				 1499.39,
@@ -86,7 +86,7 @@ public class BoulangeApplication {
 				 17.3,
 				 16,
 				 "08.png",
-				 "https://www.boulanger.com/ref/1161111");
+				 "https://www.boulanger.com/ref/1161111",10);
 		
 		Ordinateur  ordinateur9  =  new  Ordinateur("HP 17-cp0054",
 				 449,
@@ -94,7 +94,7 @@ public class BoulangeApplication {
 				 17,
 				 8,
 				 "09.png",
-				 "https://www.boulanger.com/ref/1169654");
+				 "https://www.boulanger.com/ref/1169654",4);
 		
 		Ordinateur  ordinateur10  =  new  Ordinateur("ACER Aspire A517-52G-757L",
 				 1099,
@@ -102,7 +102,7 @@ public class BoulangeApplication {
 				 17.3,
 				 16,
 				 "10.png",
-				 "https://www.boulanger.com/ref/1164115");
+				 "https://www.boulanger.com/ref/1164115",7);
 		
 		Ordinateur  ordinateur11  =  new  Ordinateur("PC Gamer MSI GS66 Stealth 11UG-289FR",
 				 3199,
@@ -110,7 +110,7 @@ public class BoulangeApplication {
 				 15.6,
 				 32,
 				 "11.png",
-				 "https://www.boulanger.com/ref/1164182");
+				 "https://www.boulanger.com/ref/1164182",5);
 		
 		Ordinateur  ordinateur12  =  new  Ordinateur("ACER Swift SF514-55T-73TS Vert",
 				 1199,
@@ -118,7 +118,7 @@ public class BoulangeApplication {
 				 14,
 				 16,
 				 "12.png",
-				 "https://www.boulanger.com/ref/1164097");
+				 "https://www.boulanger.com/ref/1164097",2);
 		
 		ordinateurRepository.save(ordinateur1);
 		ordinateurRepository.save(ordinateur2);
@@ -143,15 +143,10 @@ public class BoulangeApplication {
 		}
 		 try {
 			 hashPassword = Outil.hashMdpSha256("admin");
-			 utilisateur = new Utilisateur("admin", hashPassword, "arnacoeur@gmail.com", "administrateur");
+			 utilisateur = new Utilisateur("admin", hashPassword, "admin@gmail.com", "administrateur");
 			 utilisateurRepository.save(utilisateur);
 		} catch (NoSuchAlgorithmException e) {
 			 System.out.println("Impossible de créer l'utilisateur admin");
 		}
-		 utilisateur.acheterOrdinateur(ordinateur1);
-			utilisateur.acheterOrdinateur(ordinateur2);
-			utilisateurRepository.save(utilisateur);
-
 	}	
-
 }

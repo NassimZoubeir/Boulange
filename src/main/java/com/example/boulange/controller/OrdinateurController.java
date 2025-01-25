@@ -64,6 +64,7 @@ public class OrdinateurController {
 	            String processeur,
 	            int vive,
 	            String lien,
+	            int nombreOrdinateur,
 	            MultipartFile image) {
 
 	    	String imageName = null;
@@ -86,7 +87,7 @@ public class OrdinateurController {
 	    	        return "error"; 
 	    	    }
 	    	}
-	    	Ordinateur ordinateur = new Ordinateur(denomination, prix, processeur, ecran, vive, imageName, lien);
+	    	Ordinateur ordinateur = new Ordinateur(denomination, prix, processeur, ecran, vive, imageName, lien, nombreOrdinateur);
 	    	ordinateurService.creerOrdinateur(ordinateur);
 
 	    	return "redirect:/afficher-ordinateurs";
@@ -111,6 +112,7 @@ public class OrdinateurController {
 		    	
 		    	if(!ordinateurAcheterListId.contains(id)) {
 		    		ordinateurAcheterListId.add(id);
+		    		ordinateurService.decrementernombreOrdinateur(id);
 		    	}
 		    	request.getSession().setAttribute("ordinateurAcheterListId", ordinateurAcheterListId);
 		    	System.out.println("ordinateurAcheterListId=" + ordinateurAcheterListId);
@@ -129,4 +131,15 @@ public class OrdinateurController {
 				model.addAttribute("dénomination", "Achat d'ordinateur");
 				return "panier";
 			}
+		 @RequestMapping("/supprimer-panier/{id}")
+		    public String supprimerOrdinateurPanier(@PathVariable Long id, Model model, HttpServletRequest request) {
+		    	System.out.println("==== /supprimer-panier ====");
+		    	List<Long> ordinateurAcheterListId = (List<Long>) request.getSession().getAttribute("ordinateurAcheterListId");
+		    	System.out.println("ordinateurAcheterListId=" + ordinateurAcheterListId);
+		    	ordinateurAcheterListId.remove(id);
+		    	ordinateurService.incrementernombreOrdinateur(id);
+		    	request.getSession().setAttribute("ordinateurAcheterListId", ordinateurAcheterListId);
+		    	System.out.println("ordinateurAcheterListId=" + ordinateurAcheterListId);
+		    	return "redirect:/afficher-panier";
+		    }
 }

@@ -42,7 +42,6 @@ public  class UtilisateurService implements UtilisateurServiceItf {
 	    List<Ordinateur> ordinateurList = ordinateurService.getOrdinateurAcheterListParOrdinateurIdList(ordinateurIdList);
 
 	    for (Ordinateur ordinateur : ordinateurList) {
-	        ordinateur.setDateAchat(LocalDate.now()); // Définir la date d'achat
 	        ordinateurRepository.save(ordinateur); // Sauvegarder les modifications
 	    }
 

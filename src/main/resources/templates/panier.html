@@ -13,6 +13,7 @@
                         <th>Prix (€)</th>
                         <th>Processeur</th>
                         <th>Écran (pouces)</th>
+						<th>Nombre d'ordinateurs restant</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                         <td th:text="${ordinateur.prix}"></td>
                         <td th:text="${ordinateur.processeur}"></td>
                         <td th:text="${ordinateur.ecran}"></td>
+						<td th:text="${ordinateur.nombreOrdinateur}"></td>
                         <td>
                             <a th:href="'/afficher-ordinateur/' + ${ordinateur.id}" class="btn btn-info">Détail</a>
                             <a th:href="'/supprimer-panier/' + ${ordinateur.id}" class="btn btn-danger">Supprimer du panier</a>

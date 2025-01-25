@@ -10,4 +10,6 @@ public interface OrdinateurServiceItf {
 	void creerOrdinateur(Ordinateur ordinateur);
 	Ordinateur getOrdinateurById(Long id);
 	List<Ordinateur> getOrdinateurAcheterListParOrdinateurIdList(List<Long> ordinateurAcheterListId);
+	void incrementernombreOrdinateur(Long id);
+	void decrementernombreOrdinateur(Long id);
 }
