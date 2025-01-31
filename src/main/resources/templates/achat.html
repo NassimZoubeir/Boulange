@@ -4,34 +4,30 @@
       layout:decorate="template">
     <body>
         <div layout:fragment="content">
-            <h1>Résumé de votre commande</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Image</th>
-                            <th>Dénomination</th>
-                            <th>Prix (€)</th>
-                            <th>Processeur</th>
-                            <th>Écran (pouces)</th>
-							<th>Date d'achat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="ordinateur : ${ordinateurList}">
-                            <td th:text="${ordinateur.id}"></td>
-                            <td><img width="80" th:src="'/images/' + ${ordinateur.image}" alt="Image ordinateur"></td>
-                            <td th:text="${ordinateur.denomination}"></td>
-                            <td th:text="${ordinateur.prix}"></td>
-                            <td th:text="${ordinateur.processeur}"></td>
-                            <td th:text="${ordinateur.ecran}"></td>
-							<td th:text="${ordinateur.dateAchat != null ? ordinateur.dateAchat : 'Non défini'}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th>Dénomination</th>
+                        <th>Prix (€)</th>
+                        <th>Processeur</th>
+                        <th>Écran (pouces)</th>
+                        <th>Date d'achat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="achat : ${achatList}">
+                        <td th:text="${achat.id}"></td>
+                        <td><img width="80" th:src="'/images/' + ${achat.ordinateur.image}" alt="Image ordinateur"></td>
+                        <td th:text="${achat.ordinateur.denomination}"></td>
+                        <td th:text="${achat.ordinateur.prix}"></td>
+                        <td th:text="${achat.ordinateur.processeur}"></td>
+                        <td th:text="${achat.ordinateur.ecran}"></td>
+                        <td th:text="${#dates.format(achat.dateAchat, 'dd/MM/yyyy')}"></td>
+                    </tr>
+                </tbody>
+            </table>
             <a href="/afficher-ordinateurs" class="btn btn-secondary">Retour au catalogue</a>
         </div>
     </body>

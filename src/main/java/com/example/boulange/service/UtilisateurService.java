@@ -1,13 +1,17 @@
 package com.example.boulange.service;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import com.example.boulange.entity.Achat;
 import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.entity.Utilisateur;
+import com.example.boulange.repository.AchatRepository;
 import com.example.boulange.repository.OrdinateurRepository;
 import com.example.boulange.repository.UtilisateurRepository;
 
@@ -22,6 +26,9 @@ public  class UtilisateurService implements UtilisateurServiceItf {
 
 	@Autowired
 	private  OrdinateurServiceItf  ordinateurService;
+	
+	@Autowired
+	private AchatRepository achatRepository;
 
 	@Override
 	public void creerUtilisateur(Utilisateur utilisateur) {
@@ -37,23 +44,33 @@ public  class UtilisateurService implements UtilisateurServiceItf {
 		return utilisateur;
 	}
 	@Override
-	public void acheterListOrdinateurUtilisateur(List<Long> ordinateurIdList, Long idUtilisateur) {
-	    Utilisateur utilisateur = lireUtilisateurParId(idUtilisateur);
-	    List<Ordinateur> ordinateurList = ordinateurService.getOrdinateurAcheterListParOrdinateurIdList(ordinateurIdList);
-
-	    for (Ordinateur ordinateur : ordinateurList) {
-	        ordinateurRepository.save(ordinateur); // Sauvegarder les modifications
-	    }
-
-	    utilisateur.getAcheterOrdinateurList().addAll(ordinateurList);
-	    System.out.println("majOrdinateurAcheterListUtilisateur utilisateur=" + utilisateur);
-	    utilisateurRepository.save(utilisateur);
+	public List<Achat> getAchatOrdinateurList(Long idUtilisateur) {
+		Utilisateur utilisateur = lireUtilisateurParId(idUtilisateur);
+		System.out.println("UtilisateurService - getAchatOrdinateurList utilisateur:" + utilisateur);
+		return utilisateur.getAcheterOrdinateurList();
 	}
-
 	@Override
-	public List<Ordinateur> getAchatOrdinateurList(Long idUtilisateur) {
-		Utilisateur  utilisateur  =  lireUtilisateurParId(idUtilisateur);
-		return  utilisateur.getAcheterOrdinateurList();
-	}	
+	public Achat getAchatById(Long id) {
+		return achatRepository.findById(id).get();
+	}
+	@Override
+	public void acheterListOrdinateurUtilisateur(List<Long> ordinateurIdList, Long idUtilisateur) {
+		Utilisateur utilisateur = lireUtilisateurParId(idUtilisateur);
+		List<Ordinateur> ordinateurList = ordinateurService.getOrdinateurAcheterListParOrdinateurIdList(ordinateurIdList);
+		System.out.println("UtilisateurService - acheterListOrdinateurUtilisateur ordinateurList:\n" + ordinateurList);
+		System.out.println("majOrdinateurAcheterListUtilisateur utilisateur=" + utilisateur);
+		Achat achat = null;
+		for(int i=0; i < ordinateurList.size(); i++) {
+			achat = new Achat(ordinateurList.get(i), new Date());
+			achatRepository.save(achat);
+			utilisateur.acheterOrdinateur(achat);
+		}
+		System.out.println("majOrdinateurAcheterListUtilisateur utilisateur=" + utilisateur);
+		utilisateurRepository.save(utilisateur);	
+	}
+	    @Override
+	    public void majAchat(Achat achat) {
+	        achatRepository.save(achat);
+	    }
 	
 }

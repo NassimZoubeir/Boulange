@@ -7,7 +7,7 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Utilisateur {
@@ -18,8 +18,8 @@ public class Utilisateur {
 	private String passwdHash;
 	private String email;
 	private String role;
-	@ManyToMany
-	private  List<Ordinateur>  acheterOrdinateurList;
+	@OneToMany
+	private List<Achat> acheterOrdinateurList;
 	
 	public Utilisateur() {}
 	public Utilisateur(String login, String passwdHash, String email, String role) {
@@ -27,11 +27,14 @@ public class Utilisateur {
 		this.passwdHash = passwdHash;
 		this.email = email;
 		this.role = role;
-		acheterOrdinateurList = new ArrayList<Ordinateur>();
+		acheterOrdinateurList = new ArrayList<Achat>();
 	}
 	@Override
 	public String toString() {
 		return "Utilisateur [login=" + login + ", id=" + id + ", passwdHash=" + passwdHash + ", email=" + email + ", role=" + role +"]";
+	}
+	 public void acheterOrdinateur(Achat achat) {
+		 acheterOrdinateurList.add(achat);
 	}
 	public String getLogin() {
 		return login;
@@ -63,15 +66,10 @@ public class Utilisateur {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public List<Ordinateur> getAcheterOrdinateurList() {
+	public List<Achat> getAcheterOrdinateurList() {
 		return acheterOrdinateurList;
 	}
-	public void setAcheterOrdinateurList(List<Ordinateur> acheterOrdinateurList) {
+	public void setAcheterOrdinateurList(List<Achat> acheterOrdinateurList) {
 		this.acheterOrdinateurList = acheterOrdinateurList;
 	}
-	 public void acheterOrdinateur(Ordinateur ordinateur) {
-		 acheterOrdinateurList.add(ordinateur);
-	}
-	
-	
 }

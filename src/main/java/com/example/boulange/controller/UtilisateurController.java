@@ -74,28 +74,4 @@ public  class  UtilisateurController  {
 		request.getSession().invalidate();
 		return "accueil";
 	 }
-	@RequestMapping("/valider-panier")
-	public  String  validerPanier(Model  model,  HttpServletRequest  request)  {
-		System.out.println("====  /valider-panier  ====");
-		List<Long>  ordinateurAcheterListId  =  (List<Long>)  request.getSession().getAttribute("ordinateurAcheterListId");
-		System.out.println("ordinateurAcheterListId="  +  ordinateurAcheterListId);
-		if(ordinateurAcheterListId  !=  null)  {
-			Long  idUtilisateur  =  (Long)  request.getSession().getAttribute("id");
-			utilisateurService.acheterListOrdinateurUtilisateur(ordinateurAcheterListId,  idUtilisateur);
-			request.getSession().removeAttribute("ordinateurAcheterListId");
-		}
-		else  System.out.println("Pas d'ordinateur acheté");
-		return  "redirect:/afficher-achat";
-	}
-	@RequestMapping("/afficher-achat")
-	public  String  afficherAchat(Model  model,  HttpServletRequest  request)  {
-		System.out.println("====  /afficher-achat  ====");
-		Long  idUtilisateur  =  (Long)  request.getSession().getAttribute("id");
-		List<Ordinateur>  ordinateurList  =  utilisateurService.getAchatOrdinateurList(idUtilisateur);
-		System.out.println("ordinateurList="  +  ordinateurList);
-		model.addAttribute("denomination",  "Achat");
-		model.addAttribute("ordinateurList",  ordinateurList);
-		return  "achat";
-	}
-	
 }

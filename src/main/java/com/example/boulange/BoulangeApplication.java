@@ -1,26 +1,30 @@
 package com.example.boulange;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-
+import com.example.boulange.entity.Achat;
 import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.entity.Utilisateur;
 import com.example.boulange.outil.Outil;
+import com.example.boulange.repository.AchatRepository;
 import com.example.boulange.repository.OrdinateurRepository;
 import com.example.boulange.repository.UtilisateurRepository;
 
 @SpringBootApplication
 public class BoulangeApplication {
-	private  static  OrdinateurRepository  ordinateurRepository  =  null;
+	private  static OrdinateurRepository  ordinateurRepository  =  null;
 	private static UtilisateurRepository utilisateurRepository = null;
+	private static AchatRepository achatRepository = null;
 	public static void main(String[] args) {
 		ApplicationContext  ctx  = SpringApplication.run(BoulangeApplication.class, args);
 		ordinateurRepository  =  ctx.getBean(OrdinateurRepository.class);
 		utilisateurRepository = ctx.getBean(UtilisateurRepository.class);
+		achatRepository = ctx.getBean(AchatRepository.class);
 		initialiser();
 	}
 	public  static  void  initialiser()  {
@@ -148,5 +152,10 @@ public class BoulangeApplication {
 		} catch (NoSuchAlgorithmException e) {
 			 System.out.println("Impossible de créer l'utilisateur admin");
 		}
-	}	
+		Achat achat = new Achat(ordinateur1, new Date()); 
+		achatRepository.save(achat);
+		utilisateur.acheterOrdinateur(achat);
+		utilisateurRepository.save(utilisateur);
+	}
+	
 }
