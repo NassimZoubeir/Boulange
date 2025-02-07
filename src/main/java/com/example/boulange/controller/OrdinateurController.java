@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.example.boulange.entity.Marque;
 import com.example.boulange.entity.Ordinateur;
+import com.example.boulange.repository.MarqueRepository;
 import com.example.boulange.service.OrdinateurServiceItf;
 
 import jakarta.servlet.ServletContext;
@@ -31,6 +32,9 @@ import jakarta.servlet.http.HttpServletRequest;
 public class OrdinateurController {
 	@Autowired
 	private  OrdinateurServiceItf  ordinateurService;
+	
+	@Autowired
+    private MarqueRepository marqueRepository;
 	
 	@RequestMapping("/accueil")
 	public  String  accueil()  {
@@ -65,7 +69,8 @@ public class OrdinateurController {
 	            int vive,
 	            String lien,
 	            int nombreOrdinateur,
-	            MultipartFile image) {
+	            MultipartFile image,
+	            Long marqueId) {
 
 	    	String imageName = null;
 
@@ -87,7 +92,14 @@ public class OrdinateurController {
 	    	        return "error"; 
 	    	    }
 	    	}
-	    	Ordinateur ordinateur = new Ordinateur(denomination, prix, processeur, ecran, vive, imageName, lien, nombreOrdinateur);
+	    	
+	    	 Marque marque = marqueRepository.findById(marqueId).orElse(null);
+	         if (marque == null) {
+	             System.err.println("Erreur: Marque non trouvée pour id=" + marqueId);
+	             return "error";
+	         }
+	         
+	    	Ordinateur ordinateur = new Ordinateur(denomination, prix, processeur, ecran, vive, imageName, lien, nombreOrdinateur, marque);
 	    	ordinateurService.creerOrdinateur(ordinateur);
 
 	    	return "redirect:/afficher-ordinateurs";

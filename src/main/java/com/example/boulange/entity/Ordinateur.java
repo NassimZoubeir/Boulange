@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Ordinateur {
@@ -20,10 +21,13 @@ public class Ordinateur {
     private String image;
     private String lien;
     private int nombreOrdinateur;
+    
+    @ManyToOne
+    private Marque marque;
 
 	public Ordinateur() {}
 
-    public Ordinateur(String denomination, double prix, String processeur, double ecran, int vive, String image, String lien,int nombreOrdinateur) {
+    public Ordinateur(String denomination, double prix, String processeur, double ecran, int vive, String image, String lien,int nombreOrdinateur,Marque marque) {
         this.denomination = denomination;
         this.prix = prix;
         this.processeur = processeur;
@@ -32,6 +36,7 @@ public class Ordinateur {
         this.image = image;
         this.lien = lien;
         this.nombreOrdinateur = nombreOrdinateur;
+        this.marque = marque;
     }
 
     public Long getId() {
@@ -105,5 +110,18 @@ public class Ordinateur {
 	public void setNombreOrdinateur(int nombreOrdinateur) {
 		this.nombreOrdinateur = nombreOrdinateur;
 	}
-    
+
+	public Marque getMarque() {
+		return marque;
+	}
+
+	public void setMarque(Marque marque) {
+		this.marque = marque;
+	}
+	@Override
+	public String toString() {
+		return "Ordinateur [id=" + id + ", denomination=" + denomination + ", prix=" + prix + ", processeur="
+				+ processeur + ", ecran=" + ecran + ", vive=" + vive + ", image=" + image + ", lien=" + lien
+				+ ", nombreOrdinateur=" + nombreOrdinateur + ", marque=" + marque + "]";
+	}
 }

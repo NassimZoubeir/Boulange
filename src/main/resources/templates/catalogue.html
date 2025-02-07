@@ -10,6 +10,7 @@
                   <th>Id</th>
                   <th>Image</th>
                   <th>Dénomination</th>
+				  <th>Marque</th>
                   <th>Prix (€)</th>
                   <th>Processeur</th>
                   <th>Écran</th>
@@ -24,6 +25,7 @@
                     <td th:text="${ordinateur.id}"></td>
                     <td><img width="80" th:src="'/images/' + ${ordinateur.image}"></td>
                     <td th:text="${ordinateur.denomination}"></td>
+					<td th:text="${ordinateur.marque.nom}"></td>
                     <td th:text="${ordinateur.prix}"></td>
                     <td th:text="${ordinateur.processeur}"></td>
                     <td th:text="${ordinateur.ecran}"></td>
