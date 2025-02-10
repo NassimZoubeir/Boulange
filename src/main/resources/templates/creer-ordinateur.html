@@ -35,6 +35,14 @@
 		<input type="file" id="image" name="image" accept="image/*">
 	</div>
 	
+	<div>
+	       <label for="marqueId">Marque : </label>
+	       <select id="marqueId" name="marqueId" required>
+	           <option value="" disabled selected>Sélectionnez une marque</option>
+	           <option th:each="marque : ${marques}" th:value="${marque.id}" th:text="${marque.nom}"></option>
+	       </select>
+	   </div>
+	
 	<input type="submit" value="Ajouter" name="form_ajouter">
 	
 </form>
