@@ -21,7 +21,9 @@
 		<li th:if="${session.role == 'administrateur'}">
 		<a href="/creer-ordinateur">Créer ordinateur </a>
 		</li>
-		
+		<li th:if="${session.role == 'administrateur'}">
+		    	<a href="/admin">Partie Administrateur</a>
+		</li>
 		<li th:if="${session.id == null}">
 			<a href="/login">Se connecter</a>
 		</li>

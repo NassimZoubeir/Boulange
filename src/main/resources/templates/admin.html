@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+    <head>
+        <title>Tableau de Bord Administrateur</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <h1>Administration</h1>
+    
+            <h2>Utilisateurs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Login</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="utilisateur : ${utilisateurs}">
+                        <td th:text="${utilisateur.id}"></td>
+                        <td th:text="${utilisateur.login}"></td>
+                        <td th:text="${utilisateur.email}"></td>
+                        <td th:text="${utilisateur.role}"></td>
+                        <td>
+                            <form th:action="@{/admin/supprimerUtilisateur/{id}(id=${utilisateur.id})}" method="post">
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+           
+        </div>
+    </body>
+</html>
