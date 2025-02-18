@@ -35,7 +35,35 @@
                 </tbody>
             </table>
 
-           
-        </div>
-    </body>
-</html>
+
+
+			            <h2>Marques</h2>
+			            <form th:action="@{/admin/creerMarque}" method="post">
+			                <label for="nomMarque">Nom :</label>
+			                <input type="text" id="nomMarque" name="nom" required>
+			                <button type="submit">Créer Marque</button>
+			            </form>
+
+			            <table>
+			                <thead>
+			                    <tr>
+			                        <th>ID</th>
+			                        <th>Nom</th>
+			                        <th>Action</th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                    <tr th:each="marque : ${marques}">
+			                        <td th:text="${marque.id}"></td>
+			                        <td th:text="${marque.nom}"></td>
+			                        <td>
+			                            <form th:action="@{/admin/supprimerMarque/{id}(id=${marque.id})}" method="post">
+			                                <button type="submit">Supprimer</button>
+			                            </form>
+			                        </td>
+			                    </tr>
+			                </tbody>
+			            </table>
+			        </div>
+			    </body>
+			</html>
