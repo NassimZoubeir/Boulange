@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boulange.entity.Marque;
 import com.example.boulange.repository.MarqueRepository;
+import com.example.boulange.repository.OrdinateurRepository;
 import com.example.boulange.repository.UtilisateurRepository;
 
 
@@ -22,11 +23,15 @@ public class AdminController {
 	 private UtilisateurRepository utilisateurRepository;
 	 
 	 @Autowired
+	 private OrdinateurRepository ordinateurRepository;
+	 
+	 @Autowired
 	 private MarqueRepository marqueRepository;
 
 	    @GetMapping("/admin")
 	    public String adminTableau(Model model) {
 	        model.addAttribute("utilisateurs", utilisateurRepository.findAll());
+	        model.addAttribute("ordinateurs", ordinateurRepository.findAll());
 	        model.addAttribute("marques", marqueRepository.findAll());
 	        return "admin";
 	    }
@@ -36,6 +41,13 @@ public class AdminController {
 	        utilisateurRepository.deleteById(id);
 	        return "redirect:/admin";
 	    }
+	    
+	    @PostMapping("/admin/supprimerOrdinateur/{id}")
+	    public String supprimerOrdinateur(@PathVariable Long id) {
+	        ordinateurRepository.deleteById(id);
+	        return "redirect:/admin";
+	    }
+	    
 	    @PostMapping("/admin/creerMarque")
 	    public String creerMarque(@RequestParam String nom) {
 	        Marque marque = new Marque(nom);

@@ -35,35 +35,70 @@
                 </tbody>
             </table>
 
+            <h2>Ordinateurs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Dénomination</th>
+                        <th>Marque</th>
+                        <th>Prix</th>
+                        <th>Processeur</th>
+                        <th>Écran</th>
+                        <th>Vive</th>
+                        <th>Nombre d'ordinateurs</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ordinateur : ${ordinateurs}">
+                        <td th:text="${ordinateur.id}"></td>
+                        <td><img th:src="'/images/' + ${ordinateur.image}" alt="Image de l'ordinateur" style="width: 50px; height: auto;"></td>
+                        <td th:text="${ordinateur.denomination}"></td>
+                        <td th:text="${ordinateur.marque.nom}"></td>
+                        <td th:text="${ordinateur.prix}"></td>
+                        <td th:text="${ordinateur.processeur}"></td>
+                        <td th:text="${ordinateur.ecran}"></td>
+                        <td th:text="${ordinateur.vive}"></td>
+                        <td th:text="${ordinateur.nombreOrdinateur}"></td>
+                        <td>
+                            <form th:action="@{/admin/supprimerOrdinateur/{id}(id=${ordinateur.id})}" method="post">
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <h2>Marques</h2>
+            <form th:action="@{/admin/creerMarque}" method="post">
+                <label for="nomMarque">Nom :</label>
+                <input type="text" id="nomMarque" name="nom" required>
+                <button type="submit">Créer Marque</button>
+            </form>
 
-			            <h2>Marques</h2>
-			            <form th:action="@{/admin/creerMarque}" method="post">
-			                <label for="nomMarque">Nom :</label>
-			                <input type="text" id="nomMarque" name="nom" required>
-			                <button type="submit">Créer Marque</button>
-			            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="marque : ${marques}">
+                        <td th:text="${marque.id}"></td>
+                        <td th:text="${marque.nom}"></td>
+                        <td>
+                            <form th:action="@{/admin/supprimerMarque/{id}(id=${marque.id})}" method="post">
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-			            <table>
-			                <thead>
-			                    <tr>
-			                        <th>ID</th>
-			                        <th>Nom</th>
-			                        <th>Action</th>
-			                    </tr>
-			                </thead>
-			                <tbody>
-			                    <tr th:each="marque : ${marques}">
-			                        <td th:text="${marque.id}"></td>
-			                        <td th:text="${marque.nom}"></td>
-			                        <td>
-			                            <form th:action="@{/admin/supprimerMarque/{id}(id=${marque.id})}" method="post">
-			                                <button type="submit">Supprimer</button>
-			                            </form>
-			                        </td>
-			                    </tr>
-			                </tbody>
-			            </table>
-			        </div>
-			    </body>
-			</html>
+        </div>
+    </body>
+</html>
