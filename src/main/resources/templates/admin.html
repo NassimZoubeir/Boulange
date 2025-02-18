@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="template">
     <head>
-        <title>Tableau de Bord Administrateur</title>
+        <title>Gestion Administrateur</title>
     </head>
     <body>
         <div layout:fragment="content">
@@ -66,6 +66,11 @@
                             <form th:action="@{/admin/supprimerOrdinateur/{id}(id=${ordinateur.id})}" method="post">
                                 <button type="submit">Supprimer</button>
                             </form>
+                            <form th:action="@{/admin/mettreAJourStock/{id}(id=${ordinateur.id})}" method="post">
+                                <label for="nombreOrdinateur">Ajouter au stock :</label>
+                                <input type="number" name="nombreOrdinateur" required>
+                                <button type="submit">Mettre à jour le stock</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
@@ -98,7 +103,6 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
     </body>
 </html>

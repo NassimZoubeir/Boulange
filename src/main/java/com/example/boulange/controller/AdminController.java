@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boulange.entity.Marque;
+import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.repository.MarqueRepository;
 import com.example.boulange.repository.OrdinateurRepository;
 import com.example.boulange.repository.UtilisateurRepository;
@@ -47,13 +48,23 @@ public class AdminController {
 	        ordinateurRepository.deleteById(id);
 	        return "redirect:/admin";
 	    }
-	    
+	  
+	    @PostMapping("/admin/mettreAJourStock/{id}")
+	    public String mettreAJourStock(@PathVariable Long id, @RequestParam int nombreOrdinateur) {
+	        Ordinateur ordinateur = ordinateurRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Ordinateur invalide"));
+	        ordinateur.setNombreOrdinateur(ordinateur.getNombreOrdinateur() + nombreOrdinateur);
+	        ordinateurRepository.save(ordinateur);
+	        return "redirect:/admin";
+	    }
+
 	    @PostMapping("/admin/creerMarque")
 	    public String creerMarque(@RequestParam String nom) {
 	        Marque marque = new Marque(nom);
 	        marqueRepository.save(marque);
 	        return "redirect:/admin";
 	    }
+	    
 	    @PostMapping("/admin/supprimerMarque/{id}")
 	    public String supprimerMarque(@PathVariable Long id) {
 	        marqueRepository.deleteById(id);
