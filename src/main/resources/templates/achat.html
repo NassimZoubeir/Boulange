@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="template">
-    <body>
-        <div layout:fragment="content">
-            <table>
-                <thead>
+<body>
+    <div layout:fragment="content" class="container my-5">
+        <h1 class="text-center">Historique des Achats</h1>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover shadow-sm">
+                <thead class="table-primary text-center">
                     <tr>
                         <th>Id</th>
                         <th>Image</th>
                         <th>Dénomination</th>
-						<th>Marque</th>
+                        <th>Marque</th>
                         <th>Prix (€)</th>
                         <th>Processeur</th>
                         <th>Écran (pouces)</th>
@@ -18,11 +21,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="achat : ${achatList}">
-                        <td th:text="${achat.id}"></td>
-                        <td><img width="80" th:src="'/images/' + ${achat.ordinateur.image}" alt="Image ordinateur"></td>
+                    <tr th:each="achat : ${achatList}" class="align-middle">
+                        <td th:text="${achat.id}" class="text-center"></td>
+                        <td class="text-center">
+                            <img width="80" class="img-thumbnail" th:src="'/images/' + ${achat.ordinateur.image}" alt="Image ordinateur">
+                        </td>
                         <td th:text="${achat.ordinateur.denomination}"></td>
-						<td th:text="${achat.ordinateur.marque.nom}">
+                        <td th:text="${achat.ordinateur.marque.nom}"></td>
                         <td th:text="${achat.ordinateur.prix}"></td>
                         <td th:text="${achat.ordinateur.processeur}"></td>
                         <td th:text="${achat.ordinateur.ecran}"></td>
@@ -30,7 +35,11 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="/afficher-ordinateurs" class="btn btn-secondary">Retour au catalogue</a>
         </div>
-    </body>
+
+        <div class="text-center mt-4">
+            <a href="/afficher-ordinateurs" class="btn btn-secondary btn-lg">Retour au catalogue</a>
+        </div>
+    </div>
+</body>
 </html>

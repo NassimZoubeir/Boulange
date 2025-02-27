@@ -51,7 +51,7 @@ public class OrdinateurController {
     }
 	 @RequestMapping("/creer-ordinateur")
 	 public String creerOrdinateur(Model model) {
-	 model.addAttribute("titre", "Créer ordinateur");
+	 model.addAttribute("titre", "Ajouter un ordinateur");
 	 model.addAttribute("marques", marqueRepository.findAll());
 	 return "creer-ordinateur";
 	 }

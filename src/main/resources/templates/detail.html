@@ -3,33 +3,31 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="template">
     <body>
-        <div layout:fragment="content">
-            
-            <img style="width:40%; height:auto" th:src="'/images/' + ${ordinateur.image}" alt="Image de l'ordinateur">
-            <br>
+        <div layout:fragment="content" class="container my-5">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img class="img-fluid rounded shadow" style="max-width: 100%; height: auto;" th:src="'/images/' + ${ordinateur.image}" alt="Image de l'ordinateur">
+                </div>
 
-            <h3 th:text="'Dénomination : ' + ${ordinateur.denomination}"></h3>
-            <br>
-			
-			<h3 th:text="'Marque : ' + ${ordinateur.marque.nom}"></h3>
-			<br>
+                <div class="col-md-6">
+                    <h2 class="text-primary mb-3">Détails de l'ordinateur</h2>
+                    <p><strong>Dénomination :</strong> <span th:text="${ordinateur.denomination}"></span></p>
+                    <p><strong>Marque :</strong> <span th:text="${ordinateur.marque.nom}"></span></p>
+                    <p><strong>Prix :</strong> <span th:text="${ordinateur.prix}"></span> €</p>
+                    <p><strong>Processeur :</strong> <span th:text="${ordinateur.processeur}"></span></p>
+                    <p><strong>Écran :</strong> <span th:text="${ordinateur.ecran}"></span> pouces</p>
+                    <p><strong>Mémoire vive :</strong> <span th:text="${ordinateur.vive}"></span> Go</p>
+                    <p><strong>Nombre d'ordinateurs disponibles :</strong> <span th:text="${ordinateur.nombreOrdinateur}"></span></p>
 
-            <h3 th:text="'Prix : ' + ${ordinateur.prix} + ' €'"></h3>
-            <br>
-            
-            <h3 th:text="'Processeur : ' + ${ordinateur.processeur}"></h3>
-            <br>
+                    <div class="mt-4">
+                        <a th:href="${ordinateur.lien}" class="btn btn-primary" target="_blank">Voir plus de détails</a>
+                    </div>
+                </div>
+            </div>
 
-            <h3 th:text="'Écran : ' + ${ordinateur.ecran} + ' pouces'"></h3>
-            <br>
-
-            <h3 th:text="'Mémoire vive : ' + ${ordinateur.vive} + ' Go'"></h3>
-            <br>
-            
-			<h3 th:text="'Nombre d\'ordinateurs disponibles : ' + ${ordinateur.nombreOrdinateur}"></h3>
-			<br>
-            
-            <h3><a th:href="${ordinateur.lien}" class="btn btn-primary" target="_blank">Voir plus de détails</a></h3>
+            <div class="mt-5">
+                <a href="/afficher-ordinateurs" class="btn btn-secondary">Retour au catalogue</a>
+            </div>
         </div>
     </body>
 </html>
