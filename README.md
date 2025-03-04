@@ -1,12 +1,12 @@
 # Projet Boulange
 
 ## Description
-Le projet Boulange est une application web conçue pour la gestion d'une boulangerie. Elle offre des fonctionnalités pour la gestion des commandes, la planification de la production, et la gestion des stocks de matières premières.
+Le projet Boulange est une application web conçue pour la gestion d'une entreprise de vente d'ordinateurs. Elle offre des fonctionnalités pour la gestion des commandes, la gestion des stocks, et la présentation des produits disponibles.
 
 ## Fonctionnalités
-- Gestion des commandes clients
-- Planification de la production et des horaires de travail
-- Gestion des stocks de matières premières et des produits finis
+- Gestion des achats des clients
+- Gestion des stocks de produits
+- Présentation des ordinateurs disponibles à la vente
 - Interface utilisateur intuitive et responsive
 
 ## Technologies Utilisées
