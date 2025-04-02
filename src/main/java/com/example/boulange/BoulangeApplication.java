@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-
+import com.example.boulange.service.EmailServiceImpl;
 import com.example.boulange.entity.Achat;
 import com.example.boulange.entity.Marque;
 import com.example.boulange.entity.Ordinateur;
@@ -24,12 +24,14 @@ public class BoulangeApplication {
 	private static UtilisateurRepository utilisateurRepository = null;
 	private static AchatRepository achatRepository = null;
 	private static MarqueRepository marqueRepository = null;
+	private static EmailServiceImpl emailService = null;
 	public static void main(String[] args) {
 		ApplicationContext  ctx  = SpringApplication.run(BoulangeApplication.class, args);
 		ordinateurRepository  =  ctx.getBean(OrdinateurRepository.class);
 		utilisateurRepository = ctx.getBean(UtilisateurRepository.class);
 		achatRepository = ctx.getBean(AchatRepository.class);
 		marqueRepository = ctx.getBean(MarqueRepository.class);
+		emailService = ctx.getBean(EmailServiceImpl.class);
 		initialiser();
 	}
 	public  static  void  initialiser()  {
@@ -130,6 +132,8 @@ public class BoulangeApplication {
 		achatRepository.save(achat);
 		utilisateur.acheterOrdinateur(achat);
 		utilisateurRepository.save(utilisateur);
+		
+		 emailService.sendSimpleMessage("zoubeirnassim@gmail.com", "Email Test Boulange", "Bonjour Nassim ce mail vient de ton application Boulange");
 	}
 	
 }
