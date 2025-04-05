@@ -14,4 +14,5 @@ public interface UtilisateurServiceItf {
 	List<Achat> getAchatOrdinateurList(Long idUtilisateur);
 	Achat getAchatById(Long id);
 	void majAchat(Achat achat);
+	boolean verifierEmail(String token);
 }

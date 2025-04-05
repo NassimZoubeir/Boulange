@@ -21,6 +21,8 @@ public class Utilisateur {
 	@OneToMany
 	private List<Achat> acheterOrdinateurList;
 	
+	private boolean verified = false;
+	
 	public Utilisateur() {}
 	public Utilisateur(String login, String passwdHash, String email, String role) {
 		this.login = login;
@@ -66,6 +68,13 @@ public class Utilisateur {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 	public List<Achat> getAcheterOrdinateurList() {
 		return acheterOrdinateurList;
 	}

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.boulange.entity.Ordinateur;
 import com.example.boulange.entity.Utilisateur;
@@ -26,6 +26,20 @@ public  class  UtilisateurController  {
 	@GetMapping("/creer-compte")
 	public  String  creerUtilisateur()  {
 		return  "creer-utilisateur";
+	}
+	@GetMapping("/verifier-email")
+	public String verifierEmail(@RequestParam String token, Model model) {
+	    System.out.println("Token reçu : " + token);
+
+	    boolean isVerified = utilisateurService.verifierEmail(token);
+
+	    if (isVerified) {
+	        model.addAttribute("message", "Votre email a été vérifié avec succès !");
+	    } else {
+	        model.addAttribute("message", "Le jeton est invalide ou expiré.");
+	    }
+
+	    return "verification";
 	}
 	
 	@RequestMapping("/creer-compte-validation")
